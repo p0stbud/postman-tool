@@ -1,7 +1,7 @@
 from researcher import _researcher
-from hasher import _hasher
+from hasher import hasher_tool
 
 menu = {
     'researcher': _researcher,
-    'hasher': _hasher
+    'hasher': hasher_tool
 }

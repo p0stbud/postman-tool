@@ -15,11 +15,12 @@ def main():
                         default=['ed2k', 'SHA1_base32'], help='Use for get the chosen hash or hashes.')
     hasher.add_argument('-p', '--path', type=str, help='Point the path to get hashes.', metavar='PATH')
     args = parser.parse_args()
+    print(args)
 
-    if args.tool in menu.keys():
+    try:
         menu[args.tool](args)
-    else:
-        print(f"tools to use: {', '.join(menu.keys())}")
+    except KeyError:
+        print(f"Available tools: {', '.join(menu.keys())}")
 
 
 if __name__ == "__main__":
