@@ -1,1 +1,1 @@
-pycryptodome   # is require if the program is run on Windows OS.
+pycryptodome

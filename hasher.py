@@ -17,44 +17,67 @@ def hasher_tool(namespaces):
     else:
         print("Ścieżka nie istnieje")
         return
+
     try:
+        print('Type, Hash, Path')
+        if 'MD4' in namespaces.type:
+            [hasher.calc_md4(file) for file in files]
+            for h, f in zip(hasher.md4, files):
+                print(f"MD4, {h.upper()}, {f}")
+
         if 'ed2k' in namespaces.type:
-            for file in files:
-                hasher.calc_ed2k(file)
-            for h in hasher.ed2k:
-                print(f"ed2k: {h.upper()}")
+            [hasher.calc_ed2k(file) for file in files]
+            for h, f in zip(hasher.ed2k, files):
+                print(f"ed2k, {h.upper()}, {f}")
+
         if 'SHA1_base32' in namespaces.type:
-            for file in files:
-                hasher.calc_sha1_base32(file)
-            for h in hasher.sha1_base32:
-                print(f"SHA1_base32: {h.upper()}")
+            [hasher.calc_sha1_base32(file) for file in files]
+            for h, f in zip(hasher.sha1_base32, files):
+                print(f"SHA1_base32, {h.upper()}, {f}")
+
     except FileNotFoundError:
         print(f"Katalog '{path}' nie istnieje.")
     except PermissionError:
         print(f"Brak uprawnień do odczytu katalogu '{path}'.")
 
+
 class Hasher:
-    def __init__(self):
-        self.ed2k = []
-        self.sha1_base32 = []
+    md4 = []
+    ed2k = []
+    sha1_base32 = []
+
+    def calc_md4(self, file_path):
+        """Oblicza hash MD4 dla pliku."""
+        try:
+            with open(file_path, "rb") as f:
+                chunk = f.read()
+                self.md4.append((MD4.new(chunk).digest()).hex())
+
+        except Exception as e:
+            print(f"Error: {e}")
+            return None
 
     def calc_ed2k(self, file):
+        """Oblicza hash ED2K dla pliku zgodnie ze specyfikacją eDonkey2000."""
         try:
-            chunk_size = 9728000
+            CHUNK_SIZE = 9728000  # 9.28 MB
+            chunks = []
+
             with open(file, "rb") as f:
-                chunks = []
-                while chunk := f.read(chunk_size):
-                    chunk_md4 = MD4.new(chunk).digest()
-                    chunks.append(chunk_md4)
-                if len(chunks) == 1:
-                    self.ed2k.append(chunks[0].hex())
-                else:
-                    final_md4 = MD4.new()
-                    for chunk in chunks:
-                        final_md4.update(chunk)
-                    self.ed2k.append(final_md4.hexdigest())
+                while chunk := f.read(CHUNK_SIZE):
+                    chunks.append(MD4.new(chunk).digest())
+
+            if len(chunks) == 1:
+                self.ed2k.append(chunks[0].hex())
+            else:
+                final_md4 = MD4.new()
+                for chunk_hash in chunks:
+                    final_md4.update(chunk_hash)
+                self.ed2k.append(final_md4.hexdigest())
+
         except Exception as e:
-            return f"Błąd: {e}"
+            print(f"Error: {e}")
+
 
     def calc_sha1_base32(self, file):
         try:
@@ -64,5 +87,6 @@ class Hasher:
                     sha1.update(chunk)
                 sha1_base32 = base64.b32encode(sha1.digest()).decode()
                 self.sha1_base32.append(sha1_base32)
+
         except Exception as e:
             return f"Błąd: {e}"

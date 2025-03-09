@@ -1,7 +1,7 @@
 import os
 
 
-def _researcher(namespaces):
+def researcher_tool(namespaces):
     path = namespaces.path
     if path:
         print(namespaces.path)
