@@ -29,11 +29,11 @@ python3 postman-tool.py hasher -t <typ_hasha> -p <ścieżka>
 #### Opcje:
 
 - -t, --type: Określa typ hasha, który ma być obliczony. Wartości do wyboru:
-- ed2k – Hash zgodny ze specyfikacją eDonkey2000.
-- SHA1_base32 – Hash SHA1 zakodowany w base32.
-- MD4 – Hash MD4.
-#### Przykład: -t ed2k SHA1_base32.
-- -p, --path: Określa ścieżkę do katalogu lub pliku, dla którego mają być obliczone hashe. Jeśli nie podasz tej opcji, - narzędzie spróbuje użyć bieżącego katalogu.
+  - ed2k – Hash zgodny ze specyfikacją eDonkey2000.
+  - SHA1_base32 – Hash SHA1 zakodowany w base32.
+  - MD4 – Hash MD4.
+Przykład: -t ed2k SHA1_base32.
+- -p, --path: Określa ścieżkę do katalogu lub pliku, dla którego mają być obliczone hashe. Jeśli nie podasz tej opcji, narzędzie spróbuje użyć bieżącego katalogu.
 
 #### Przykłady:
 
@@ -59,7 +59,7 @@ SHA1_base32, <hash>, <file_path>
 ed2k, <hash>, <file_path>
 ```
 #### Przykładowe wyjście:
-```pgsql
+```php-template
 Type, Hash, Path
 MD4, D41D8CD98F00B204E9800998ECF8427E, /path/to/file.txt
 SHA1_base32, MFRGGZDFMZTWQ2TLN4ZGLOJ3IFQPE36DQKMLO2DY, /path/to/file.txt
