@@ -80,6 +80,7 @@ class Hasher:
 
 
     def calc_sha1_base32(self, file):
+        """Oblicza hash SHA1 zakodowany w base32 dla pliku."""
         try:
             with open(file, "rb") as f:
                 sha1 = SHA1.new()
