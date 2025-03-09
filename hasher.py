@@ -15,7 +15,7 @@ def hasher_tool(namespaces):
     elif os.path.isfile(path):
         files.append(path)
     else:
-        print("Ścieżka nie istnieje")
+        print("The path is not found")
         return
 
     try:
@@ -36,9 +36,9 @@ def hasher_tool(namespaces):
                 print(f"SHA1_base32, {h.upper()}, {f}")
 
     except FileNotFoundError:
-        print(f"Katalog '{path}' nie istnieje.")
+        print(f"The directory '{path}' does not exist.")
     except PermissionError:
-        print(f"Brak uprawnień do odczytu katalogu '{path}'.")
+        print(f"Permission denied to read the directory '{path}'.")
 
 
 class Hasher:
@@ -90,4 +90,4 @@ class Hasher:
                 self.sha1_base32.append(sha1_base32)
 
         except Exception as e:
-            return f"Błąd: {e}"
+            return f"Error: {e}"

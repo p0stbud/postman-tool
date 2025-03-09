@@ -31,8 +31,9 @@ python3 postman-tool.py hasher -t <typ_hasha> -p <ścieżka>
 - -t, --type: Określa typ hasha, który ma być obliczony. Wartości do wyboru:
   - ed2k – Hash zgodny ze specyfikacją eDonkey2000.
   - SHA1_base32 – Hash SHA1 zakodowany w base32.
-  - MD4 – Hash MD4.
-Przykład: -t ed2k SHA1_base32.
+  - MD4 – Hash MD4. 
+
+  Przykład: -t ed2k MD4
 - -p, --path: Określa ścieżkę do katalogu lub pliku, dla którego mają być obliczone hashe. Jeśli nie podasz tej opcji, narzędzie spróbuje użyć bieżącego katalogu.
 
 #### Przykłady:
